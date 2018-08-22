@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "Tank.h"
+#include "Public/Tank.h"
 #include "TankPlayerController.generated.h"
 
 /**
