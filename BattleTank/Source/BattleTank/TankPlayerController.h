@@ -22,9 +22,8 @@ private:
 
 	void AimTowardsCrosshair();
 
-	
 
-	
+		
 public:
 	ATank * GetControlledTank() const;
 
@@ -34,4 +33,9 @@ public:
 		
 	void Tick(float DeltaTime);
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float CrossHairXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float CrossHairYLocation = 0.3333;
 };
