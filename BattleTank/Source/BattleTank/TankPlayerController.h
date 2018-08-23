@@ -14,11 +14,22 @@ UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+private:
+
+	//start the tank moving the barrel so that a shot will hit where 
+	//the crosshair intersects the world
+
+	void AimTowardsCrosshair();
+
 	
 public:
 	ATank * GetControlledTank() const;
 
 	void BeginPlay() override;
 		
+	void Tick(float DeltaTime);
+
+	
 	
 };
