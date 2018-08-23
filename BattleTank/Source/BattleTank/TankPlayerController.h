@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "Public/Tank.h"
+#include "Engine/World.h"
 #include "TankPlayerController.generated.h"
+
 
 /**
  * 
@@ -31,6 +33,8 @@ public:
 
 	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
 
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector & OutHitLocation) const;
+
 	void BeginPlay() override;
 		
 	void Tick(float DeltaTime);
@@ -40,4 +44,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float CrossHairYLocation = 0.3333;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float LineTraceRange = 1000000;
 };
