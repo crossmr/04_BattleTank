@@ -29,6 +29,8 @@ public:
 
 	bool bGetSightRayHitLocation(FVector& OutHitLocation) const;
 
+	bool GetLookDirection(FVector2D ScreenLocation, FVector & LookDirection) const;
+
 	void BeginPlay() override;
 		
 	void Tick(float DeltaTime);
