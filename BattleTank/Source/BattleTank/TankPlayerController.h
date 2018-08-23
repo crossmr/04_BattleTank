@@ -23,13 +23,15 @@ private:
 	void AimTowardsCrosshair();
 
 	
+
+	
 public:
 	ATank * GetControlledTank() const;
+
+	bool bGetSightRayHitLocation(FVector& OutHitLocation) const;
 
 	void BeginPlay() override;
 		
 	void Tick(float DeltaTime);
 
-	
-	
 };
