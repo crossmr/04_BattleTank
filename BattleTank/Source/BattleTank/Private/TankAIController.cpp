@@ -1,6 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "../Public/TankAIController.h"
+#include "TankAIController.h"
 #include "BattleTank.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
