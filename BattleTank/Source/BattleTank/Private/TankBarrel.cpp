@@ -4,7 +4,7 @@
 
 void UTankBarrel::Elevate(float DegreesPerSecond)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Tank Barrel"));
+	UE_LOG(LogTemp, Warning, TEXT("TankBarrel"));
 }
 
 
