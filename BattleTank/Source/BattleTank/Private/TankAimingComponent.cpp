@@ -3,10 +3,10 @@
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "GameFramework/Actor.h"
-#include "Engine/World.h" //debug testing to provide time
+//#include "Engine/World.h" //debug testing to provide time
 #include "Components/SceneComponent.h"
 #include "ControlPointMeshComponent.h"
-#include "DrawDebugHelpers.h" //debug testing to p rovide line drawing
+//#include "DrawDebugHelpers.h" //debug testing to p rovide line drawing
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
 
@@ -49,8 +49,8 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 	if (bHaveAimSolution)//calculate velocity
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Aim Solution found target: %s"), *OutHitLocation.ToString());
-		DrawDebugLine
+		//UE_LOG(LogTemp, Warning, TEXT("Aim Solution found target: %s"), *OutHitLocation.ToString());
+		/*DrawDebugLine
 		(
 			GetWorld(),
 			StartLocation,
@@ -60,14 +60,14 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation, float LaunchSpeed)
 			0.0f,
 			0.0f,
 			10.0f
-		);
+		);*/
 		MoveBarrelTowards(AimDirection);
 		
 	}
 	else
 	{
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f No aim solution found"),Time);
+		/*auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f No aim solution found"),Time);*/
 	}
 	//if no solution found do nothing 
 }
