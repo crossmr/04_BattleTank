@@ -2,6 +2,7 @@
 
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
+#include "TankTurret.h"
 #include "GameFramework/Actor.h"
 //#include "Engine/World.h" //debug testing to provide time
 #include "Components/SceneComponent.h"
@@ -24,6 +25,12 @@ UTankAimingComponent::UTankAimingComponent()
 void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
+
+}
+
+void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
+{
+	Turret = TurretToSet;
 
 }
 
@@ -81,6 +88,8 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	
 	
 	Barrel->Elevate(DeltaRotator.Pitch); 
+	Turret->Rotate(DeltaRotator.Yaw);//Call turret to rotate
+	
 
 }
 
