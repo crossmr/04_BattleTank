@@ -6,18 +6,27 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack * RightTrackToSet)
 {
-	if (!LeftTrackToSet || !RightTrackToSet) { return; }
+	
 	LeftTrack = LeftTrackToSet;
 	RightTrack = RightTrackToSet;
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	auto Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s Intending to move forward at %f"), *Name, Throw);
-
+	/*auto Name = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s Intending to move forward at %f"), *Name, Throw);*/
+	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
 
 	//TODO: Prevent double speed due to dual controls
 }
+
+void UTankMovementComponent::IntendRotateClockwise(float Throw)
+{
+	if (!LeftTrack || !RightTrack) { return; }
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(-Throw);
+
+}
+
