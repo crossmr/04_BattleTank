@@ -13,8 +13,7 @@ void UTankMovementComponent::Initialise(UTankTrack* LeftTrackToSet, UTankTrack *
 
 void UTankMovementComponent::IntendMoveForward(float Throw)
 {
-	/*auto Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s Intending to move forward at %f"), *Name, Throw);*/
+	
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
@@ -28,5 +27,12 @@ void UTankMovementComponent::IntendRotateClockwise(float Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
 
+}
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	//no need to call super as we are replacing functionality
+	auto Name = GetOwner()->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s Intending to move forward at %s"), *Name, *MoveVelocity.ToString());
 }
 
