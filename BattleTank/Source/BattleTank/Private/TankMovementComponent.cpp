@@ -17,8 +17,6 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 	if (!LeftTrack || !RightTrack) { return; }
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-
-	//TODO: Prevent double speed due to dual controls
 }
 
 void UTankMovementComponent::IntendRotateClockwise(float Throw)
@@ -32,8 +30,6 @@ void UTankMovementComponent::IntendRotateClockwise(float Throw)
 void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
 {
 	//no need to call super as we are replacing functionality
-	/*auto Name = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s Intending to move forward at %s"), *Name, *MoveVelocity.GetSafeNormal().ToString());*/
 
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 	auto TankForward = GetOwner()->GetActorForwardVector().GetSafeNormal();
