@@ -18,8 +18,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 
 	//No need to protect pointers
-	auto Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("BOMI: %s Tank Constructor"), *Name)
+	
 }
 
 void ATank::BeginPlay()
@@ -30,15 +29,16 @@ void ATank::BeginPlay()
 
 void ATank::AimAt(FVector OutHitLocation)
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(OutHitLocation, LaunchSpeed);
 }
 
 void ATank::Fire()
 {
+	if (!ensure(Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 
-	if (Barrel && isReloaded) 
+	if (isReloaded) 
 	{
 
 		auto SocketLocation = Barrel->GetSocketLocation(FName("Projectile"));
