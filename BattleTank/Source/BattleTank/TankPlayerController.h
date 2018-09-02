@@ -24,10 +24,14 @@ private:
 
 	void AimTowardsCrosshair();
 
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		ATank * GetControlledTank() const;
+
 
 		
 public:
-	ATank * GetControlledTank() const;
+
 
 	bool bGetSightRayHitLocation(FVector& OutHitLocation) const;
 
