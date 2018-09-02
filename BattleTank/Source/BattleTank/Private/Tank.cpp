@@ -25,8 +25,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); //needed for BP begin play to work
-	auto Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("BOMI: %s Tank BeginPlay"), *Name)
+	
 }
 
 void ATank::AimAt(FVector OutHitLocation)
