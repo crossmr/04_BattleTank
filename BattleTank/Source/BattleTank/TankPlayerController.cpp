@@ -2,7 +2,7 @@
 
 
 #include "TankPlayerController.h"
-#include "Public/Tank.h"
+#include "Tank.h"
 #include "BattleTank.h"
 #include "TankAimingComponent.h"
 #include "GameFramework/PlayerController.h"
