@@ -23,6 +23,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay(); //needed for BP begin play to work
+
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 	
 }
 
