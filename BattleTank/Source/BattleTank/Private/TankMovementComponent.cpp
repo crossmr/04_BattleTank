@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankMovementComponent.h"
+#include "GameFramework/Actor.h"
 #include "TankTrack.h"
 
 
@@ -40,5 +41,14 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 	auto RightTurn = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
 	IntendRotateClockwise(RightTurn);
 
+}
+
+void UTankMovementComponent::Reset()
+{
+	auto CurrentPosition = GetOwner()->GetActorLocation();
+	FVector NewLocation = FVector(CurrentPosition.X, CurrentPosition.Y, 100.f);
+	FRotator CurrentRotation = GetOwner()->GetActorRotation();
+	FRotator NewRotation = FRotator(CurrentRotation.Pitch, CurrentRotation.Yaw, 0.0f);
+	GetOwner()->SetActorLocationAndRotation(NewLocation, NewRotation, false);
 }
 

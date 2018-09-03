@@ -25,6 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankTrack* LeftTrackToSet, UTankTrack * RightTrackToSet);
 
+	UFUNCTION(BlueprintCallable)
+		void Reset();
+
 	
 
 

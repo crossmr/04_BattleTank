@@ -57,6 +57,8 @@ private:
 
 	void MoveBarrelTowards(FVector AimDirection);
 
+	bool IsBarrelMoving();
+
 	UTankBarrel * Barrel = nullptr;
 	UTankTurret * Turret = nullptr;
 
@@ -72,6 +74,9 @@ private:
 		TSubclassOf<AProjectile> ProjectileBlueprint;
 
 	virtual void BeginPlay() override;
+
+	FVector AimDirection;
+
 	
 
 	

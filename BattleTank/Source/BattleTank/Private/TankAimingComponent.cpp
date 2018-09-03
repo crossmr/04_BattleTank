@@ -4,6 +4,7 @@
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "Projectile.h"
+#include "Math/Vector.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 //#include "Engine/World.h" //debug testing to provide time
@@ -35,16 +36,32 @@ void UTankAimingComponent::BeginPlay()
 void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
 	//UE_LOG(LogTemp, Warning, TEXT("TICKING"))
-	if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds)
+	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringStatus = EFiringStatus::Reloading;
 	}
+	else if (IsBarrelMoving())
+	{
+		FiringStatus = EFiringStatus::Aiming;
+	}
+	else
+	{
+		FiringStatus = EFiringStatus::Locked;
+	}
 }
+
 
 void UTankAimingComponent::Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet)
 {
 	Barrel = BarrelToSet;
 	Turret = TurretToSet;
+}
+
+bool UTankAimingComponent::IsBarrelMoving()
+{
+	if (!ensure(Barrel)) { return false; }
+	auto BarrelForward = Barrel->GetForwardVector();
+	return !BarrelForward.Equals(AimDirection, 0.01);
 }
 
 void UTankAimingComponent::AimAt(FVector OutHitLocation)
@@ -68,7 +85,7 @@ void UTankAimingComponent::AimAt(FVector OutHitLocation)
 
 	if (bHaveAimSolution)//calculate velocity
 	{
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 	}
 
