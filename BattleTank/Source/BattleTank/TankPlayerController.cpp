@@ -15,7 +15,7 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (!ensure(AimingComponent)) { return; }
 	FoundAimingComponent(AimingComponent);
 }
@@ -24,23 +24,18 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimTowardsCrosshair();
-	//UE_LOG(LogTemp, Warning, TEXT("I'm ticking"))
-}
-
-ATank * ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
+	
 }
 
 void ATankPlayerController::AimTowardsCrosshair()
 {
-	if (!ensure(GetControlledTank())) { return; }
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	if (!ensure(AimingComponent)) { return; }
 	
 	FVector OutHitLocation; //Out parameter
 	if (bGetSightRayHitLocation(OutHitLocation)) //is going to line trace later
 	{
-		GetControlledTank()->AimAt(OutHitLocation);
-		//TODO tell tank to aim at this point
+		AimingComponent->AimAt(OutHitLocation);
 	}
 }
 
@@ -51,8 +46,8 @@ bool ATankPlayerController::bGetSightRayHitLocation(FVector& OutHitLocation ) co
 	int32 ViewportSizeX, ViewPortSizeY;
 	GetViewportSize(ViewportSizeX, ViewPortSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX*CrossHairXLocation, ViewPortSizeY*CrossHairYLocation);
-	//auto ScreenLocation = FVector2D((ViewportSizeX -(ViewportSizeX*CrossHairXLocation)), (ViewPortSizeY-(ViewPortSizeY*CrossHairYLocation)));
-	//UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *ScreenLocation.ToString());
+
+
 	//Deproject the screen position of crosshair to a world direction
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
@@ -82,12 +77,12 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
 	FVector MaximumRange = StartLocation + (LookDirection * LineTraceRange);
 
-	if (ensure(GetWorld()->LineTraceSingleByChannel(
+	if (GetWorld()->LineTraceSingleByChannel(
 		HitResult,
 		StartLocation,
 		MaximumRange,
 		ECollisionChannel::ECC_Visibility)
-		))
+		)
 	{
 		OutHitLocation = HitResult.Location;
 		return true;

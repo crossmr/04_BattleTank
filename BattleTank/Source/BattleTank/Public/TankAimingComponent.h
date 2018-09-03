@@ -30,7 +30,7 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 public:	
 
 
-	void AimAt(FVector OutHitLocation, float LaunchSpeed);
+	void AimAt(FVector OutHitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialise(UTankBarrel * BarrelToSet, UTankTurret * TurretToSet);
@@ -48,6 +48,9 @@ private:
 	UTankTurret * Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float LaunchSpeed = 4000; //TODO Find sensible default
 
 	
 
