@@ -45,8 +45,8 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 void UTankMovementComponent::Reset()
 {
-	auto CurrentPosition = GetOwner()->GetActorLocation();
-	FVector NewLocation = FVector(CurrentPosition.X, CurrentPosition.Y, 100.f);
+	FVector CurrentPosition = GetOwner()->GetActorLocation();
+	FVector NewLocation = FVector(CurrentPosition.X, CurrentPosition.Y, CurrentPosition.Z + 100.f);
 	FRotator CurrentRotation = GetOwner()->GetActorRotation();
 	FRotator NewRotation = FRotator(CurrentRotation.Pitch, CurrentRotation.Yaw, 0.0f);
 	GetOwner()->SetActorLocationAndRotation(NewLocation, NewRotation, false);
