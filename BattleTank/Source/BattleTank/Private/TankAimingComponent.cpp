@@ -6,6 +6,7 @@
 #include "Projectile.h"
 #include "Math/Vector.h"
 #include "Engine/World.h"
+#include "UObject/ConstructorHelpers.h"
 #include "GameFramework/Actor.h"
 //#include "Engine/World.h" //debug testing to provide time
 #include "Components/SceneComponent.h"
@@ -24,12 +25,20 @@ UTankAimingComponent::UTankAimingComponent()
 	PrimaryComponentTick.bCanEverTick = true; 
 
 	// ...
+
+	static ConstructorHelpers::FClassFinder<AProjectile> Proj(TEXT("/Game/Projectile_BP"));
+
+	if (Proj.Class)
+	{
+		ProjectileBlueprint = Proj.Class;
+	}
 }
 
 void UTankAimingComponent::BeginPlay()
 {
 	//So that first fire is after initial reload
 	LastFireTime = FPlatformTime::Seconds();
+
 }
 
 
@@ -140,9 +149,11 @@ void UTankAimingComponent::Fire()
 	}
 }
 
-int UTankAimingComponent::GetAmmo() const
+int32 UTankAimingComponent::GetAmmo() const
 {
 	return Ammo;
 }
+
+
 
 
