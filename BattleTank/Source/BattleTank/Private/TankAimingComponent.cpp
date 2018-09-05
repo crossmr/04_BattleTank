@@ -26,7 +26,7 @@ UTankAimingComponent::UTankAimingComponent()
 
 	// ...
 
-	static ConstructorHelpers::FClassFinder<AProjectile> Proj(TEXT("/Game/Projectile_BP"));
+	static ConstructorHelpers::FClassFinder<AProjectile> Proj(TEXT("/Game/Projectile/Projectile_BP"));
 
 	if (Proj.Class)
 	{
