@@ -4,6 +4,10 @@
 #include "Components/SceneComponent.h"
 #include "UObject/UnrealType.h"
 #include "GameFramework/Actor.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
+
 
 
 
@@ -22,6 +26,8 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	CurrentHealth = StartingHealth;
+	
+	
 
 }
 
