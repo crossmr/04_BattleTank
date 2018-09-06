@@ -3,6 +3,7 @@
 #include "TankAIController.h"
 #include "BattleTank.h"
 #include "TankAimingComponent.h"
+#include "GameFramework/Pawn.h"
 #include "Engine/World.h"
 #include "Tank.h" //to implement ondeath
 #include "GameFramework/PlayerController.h"
@@ -29,6 +30,7 @@ void ATankAIController::SetPawn(APawn* InPawn)
 
 void ATankAIController::OnTankDeath()
 {
+	GetPawn()->DetachFromControllerPendingDestroy();
 	UE_LOG(LogTemp, Warning, TEXT("Tank is dead"))
 }
 
@@ -40,12 +42,11 @@ void ATankAIController::Tick(float DeltaTime)
 	auto ControlledTank = GetPawn();
 	auto ControlledTankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
-	auto Name = PlayerTank->GetName();
-
 	if (!ensure(PlayerTank && ControlledTank)) { return; }
 	
 	MoveToActor(PlayerTank, AcceptanceRadius);
 	//Aim Towards Player
+	if (!GetPawn()) { return; }
 	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 

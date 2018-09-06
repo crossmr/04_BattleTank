@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 #include "Components/SceneComponent.h"
+#include "UObject/UnrealType.h"
 #include "GameFramework/Actor.h"
 
 
@@ -15,6 +16,13 @@ ATank::ATank()
 
 	//No need to protect pointers
 	
+}
+
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentHealth = StartingHealth;
+
 }
 
 
@@ -33,6 +41,7 @@ float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEve
 
 float ATank::GetHealthPercent() const
 {
+	
 	return (float)CurrentHealth / (float)StartingHealth;
 }
 
