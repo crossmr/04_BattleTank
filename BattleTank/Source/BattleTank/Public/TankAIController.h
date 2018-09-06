@@ -21,7 +21,11 @@ public:
 private:	
 	virtual void Tick(float DeltaTime) override;
 
-	//how close can AI tank get to player
+	virtual void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+		void OnTankDeath();
+
 
 protected:
 
