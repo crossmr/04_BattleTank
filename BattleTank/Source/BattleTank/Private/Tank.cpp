@@ -4,6 +4,7 @@
 #include "Components/SceneComponent.h"
 #include "UObject/UnrealType.h"
 #include "GameFramework/Actor.h"
+#include "Components/StaticMeshComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
@@ -17,6 +18,15 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+
+	/*TankBody = CreateDefaultSubobject<UStaticMeshComponent>(FName("Tank Body"));
+	SetRootComponent(TankBody);
+	TankBody->SetNotifyRigidBodyCollision(true);
+	TankBody->SetVisibility(true);
+
+	DeathSmoke = CreateDefaultSubobject<UParticleSystemComponent>(FName("Death Smoke"));
+	DeathSmoke->SetupAttachment(RootComponent);
+	DeathSmoke->bAutoActivate = false;*/
 
 	//No need to protect pointers
 	

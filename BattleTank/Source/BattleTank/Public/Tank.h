@@ -40,5 +40,13 @@ private:
 
 
 protected:
-	
+
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		UStaticMeshComponent* TankBody = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		UParticleSystemComponent* DeathSmoke = nullptr;
+
+
 };

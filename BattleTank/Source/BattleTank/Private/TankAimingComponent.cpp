@@ -8,10 +8,8 @@
 #include "Engine/World.h"
 #include "UObject/ConstructorHelpers.h"
 #include "GameFramework/Actor.h"
-//#include "Engine/World.h" //debug testing to provide time
 #include "Components/SceneComponent.h"
 #include "ControlPointMeshComponent.h"
-//#include "DrawDebugHelpers.h" //debug testing to p rovide line drawing
 #include "Kismet/KismetSystemLibrary.h"
 #include "Kismet/GameplayStatics.h"
 
