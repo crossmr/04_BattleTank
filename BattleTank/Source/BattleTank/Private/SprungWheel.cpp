@@ -13,26 +13,10 @@ ASprungWheel::ASprungWheel()
 	
 	PhysicsConstraint = CreateDefaultSubobject<UPhysicsConstraintComponent>(FName("PhysicsConstraint"));
 	SetRootComponent(PhysicsConstraint);
-	PhysicsConstraint->SetConstrainedComponents(Mass, FName("MassBone"), Wheel, FName("WheelBone"));
-	PhysicsConstraint->SetLinearZLimit(ELinearConstraintMotion::LCM_Free, 0);
-	PhysicsConstraint->SetAngularTwistLimit(EAngularConstraintMotion::ACM_Locked, 0);
-	PhysicsConstraint->SetAngularSwing1Limit(EAngularConstraintMotion::ACM_Locked, 0);
-	PhysicsConstraint->SetAngularSwing2Limit(EAngularConstraintMotion::ACM_Locked, 0);
-	PhysicsConstraint->SetLinearPositionDrive(false, false, true);
-	PhysicsConstraint->SetLinearVelocityDrive(false, false, true);
-	PhysicsConstraint->SetLinearDriveParams(5000.f, 2000.f, 0.f);
-
-	Mass = CreateDefaultSubobject<UStaticMeshComponent>(FName("Mass"));
-	Mass->SetupAttachment(RootComponent);
-
-	Mass->SetSimulatePhysics(true);
-	Mass->SetMassOverrideInKg(FName("MassBone"), 40000, true);
-
-
+	
 	Wheel = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wheel"));
 	Wheel->SetupAttachment(RootComponent);
-	Wheel->SetSimulatePhysics(true);
-	Wheel->SetMassOverrideInKg(FName("WheelBone"), 500, true);
+	
 
 
 }
@@ -41,15 +25,7 @@ ASprungWheel::ASprungWheel()
 void ASprungWheel::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	if (GetAttachParentActor())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Not Null"))
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Null"))
-	}
+	SetupConstraints();
 	
 }
 
@@ -59,4 +35,13 @@ void ASprungWheel::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+void ASprungWheel::SetupConstraints()
+{
+	if (!GetAttachParentActor()) { return; }
+	UPrimitiveComponent* BodyRoot = Cast<UPrimitiveComponent>(GetAttachParentActor()->GetRootComponent());
+	if (!BodyRoot) { return; }
+	PhysicsConstraint->SetConstrainedComponents(Wheel, NAME_None, BodyRoot, NAME_None);
+}
+
 

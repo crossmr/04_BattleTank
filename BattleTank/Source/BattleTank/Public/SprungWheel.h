@@ -22,9 +22,6 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
-		UStaticMeshComponent* Mass = nullptr;
-
-	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UStaticMeshComponent* Wheel = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -33,6 +30,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+private:
+	void SetupConstraints();
 
 	
 	
